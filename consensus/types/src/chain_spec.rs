@@ -652,7 +652,7 @@ impl ChainSpec {
             })
             .expect("calculation does not overflow"),
             effective_balance_increment: option_wrapper(|| {
-                u64::checked_pow(2, 10)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 0)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
 
@@ -972,7 +972,7 @@ impl ChainSpec {
             })
             .expect("calculation does not overflow"),
             effective_balance_increment: option_wrapper(|| {
-                u64::checked_pow(2, 10)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 0)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
 
