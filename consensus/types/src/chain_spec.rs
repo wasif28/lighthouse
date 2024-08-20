@@ -644,15 +644,15 @@ impl ChainSpec {
             })
             .expect("calculation does not overflow"),
             max_effective_balance: option_wrapper(|| {
-                u64::checked_pow(2, 5)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 20)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             ejection_balance: option_wrapper(|| {
-                u64::checked_pow(2, 4)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 19)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             effective_balance_increment: option_wrapper(|| {
-                u64::checked_pow(2, 0)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 10)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
 
@@ -778,7 +778,7 @@ impl ChainSpec {
             })
             .expect("calculation does not overflow"),
             max_effective_balance_electra: option_wrapper(|| {
-                u64::checked_pow(2, 11)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 20)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             min_slashing_penalty_quotient_electra: u64::checked_pow(2, 12)
@@ -964,15 +964,15 @@ impl ChainSpec {
             })
             .expect("calculation does not overflow"),
             max_effective_balance: option_wrapper(|| {
-                u64::checked_pow(2, 5)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 20)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             ejection_balance: option_wrapper(|| {
-                u64::checked_pow(2, 4)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 19)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             effective_balance_increment: option_wrapper(|| {
-                u64::checked_pow(2, 0)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 10)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
 
@@ -1100,7 +1100,7 @@ impl ChainSpec {
             })
             .expect("calculation does not overflow"),
             max_effective_balance_electra: option_wrapper(|| {
-                u64::checked_pow(2, 11)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 20)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             min_slashing_penalty_quotient_electra: u64::checked_pow(2, 12)
@@ -1283,6 +1283,10 @@ pub struct Config {
     inactivity_score_recovery_rate: u64,
     #[serde(with = "serde_utils::quoted_u64")]
     ejection_balance: u64,
+    #[serde(with = "serde_utils::quoted_u64")]
+    max_effective_balance: u64,
+    #[serde(with = "serde_utils::quoted_u64")]
+    effective_balance_increment: u64,
     #[serde(with = "serde_utils::quoted_u64")]
     min_per_epoch_churn_limit: u64,
     #[serde(default = "default_max_per_epoch_activation_churn_limit")]
@@ -1682,6 +1686,8 @@ impl Config {
             inactivity_score_bias: spec.inactivity_score_bias,
             inactivity_score_recovery_rate: spec.inactivity_score_recovery_rate,
             ejection_balance: spec.ejection_balance,
+            max_effective_balance: spec.max_effective_balance,
+            effective_balance_increment: spec.effective_balance_increment,
             churn_limit_quotient: spec.churn_limit_quotient,
             min_per_epoch_churn_limit: spec.min_per_epoch_churn_limit,
             max_per_epoch_activation_churn_limit: spec.max_per_epoch_activation_churn_limit,
@@ -1762,6 +1768,8 @@ impl Config {
             inactivity_score_bias,
             inactivity_score_recovery_rate,
             ejection_balance,
+            max_effective_balance,
+            effective_balance_increment,
             min_per_epoch_churn_limit,
             max_per_epoch_activation_churn_limit,
             churn_limit_quotient,
@@ -1826,6 +1834,8 @@ impl Config {
             inactivity_score_bias,
             inactivity_score_recovery_rate,
             ejection_balance,
+            max_effective_balance,
+            effective_balance_increment,
             min_per_epoch_churn_limit,
             max_per_epoch_activation_churn_limit,
             churn_limit_quotient,
