@@ -644,11 +644,11 @@ impl ChainSpec {
             })
             .expect("calculation does not overflow"),
             max_effective_balance: option_wrapper(|| {
-                u64::checked_pow(2, 10)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 15)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             ejection_balance: option_wrapper(|| {
-                u64::checked_pow(2, 9)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 14)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             effective_balance_increment: option_wrapper(|| {
@@ -964,11 +964,11 @@ impl ChainSpec {
             })
             .expect("calculation does not overflow"),
             max_effective_balance: option_wrapper(|| {
-                u64::checked_pow(2, 10)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 15)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             ejection_balance: option_wrapper(|| {
-                u64::checked_pow(2, 9)?.checked_mul(u64::checked_pow(10, 9)?)
+                u64::checked_pow(2, 14)?.checked_mul(u64::checked_pow(10, 9)?)
             })
             .expect("calculation does not overflow"),
             effective_balance_increment: option_wrapper(|| {
