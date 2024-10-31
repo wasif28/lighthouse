@@ -1,22 +1,31 @@
 # This image is meant to enable cross-architecture builds.
 # It assumes the lighthouse binary has already been
 # compiled for `$TARGETPLATFORM` and moved to `./bin`.
-FROM ubuntu:22.04
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  libssl-dev \
-  ca-certificates \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+FROM ubuntu:24.04
+RUN apt-get update && apt-get -y upgrade && apt-get install -y --no-install-recommends \
+    cmake libclang-dev \
+    libpq-dev \
+    build-essential \
+    libssl-dev \
+    ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /vion
 COPY ./bin ./bin
 
-RUN if [ "$(uname -m)" = "aarch64" ]; then \
-  ARCH="arm64"; \
-  elif [ "$(uname -m)" = "x86_64" ]; then \
-  ARCH="amd64"; \
-  else \
-  echo "Unsupported architecture"; exit 1; \
-  fi && \
-  cp ./bin/${ARCH}/lighthouse /usr/local/bin/lighthouse && \
-  chmod +x /usr/local/bin/lighthouse
+RUN ARCH="$(uname -m)" && \
+    if [ "$ARCH" = "aarch64" ] || [ "$ARCH" = "arm64" ]; then \
+    cp ./bin/arm64/lighthouse /usr/local/bin/lighthouse && \
+    chmod +x /usr/local/bin/lighthouse; \
+    elif [ "$ARCH" = "x86_64" ]; then \
+    cp ./bin/amd64/lighthouse /usr/local/bin/lighthouse && \
+    chmod +x /usr/local/bin/lighthouse; \
+    else \
+    echo "Unsupported architecture: $ARCH"; \
+    exit 1; \
+    fi
+
+WORKDIR /
+
+RUN rm -rf ./vion
