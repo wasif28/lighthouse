@@ -18,4 +18,5 @@ RUN if [ "$(uname -m)" = "aarch64" ]; then \
   else \
   echo "Unsupported architecture"; exit 1; \
   fi && \
-  cp ./bin/${ARCH}/lighthouse /usr/local/bin/lighthouse
+  cp ./bin/${ARCH}/lighthouse /usr/local/bin/lighthouse && \
+  chmod +x /usr/local/bin/lighthouse
